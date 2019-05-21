@@ -1,0 +1,14 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yese.mutual" >
+
+    <application>
+        <service
+            android:name=".MutualService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.yese.mutual.MutualService" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>
