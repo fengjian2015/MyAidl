@@ -6,7 +6,7 @@ import android.os.RemoteException;
 import android.util.Log;
 
 import com.yese.mutual.IRemoteServiceCallback;
-import com.yese.mutual.MutualServiceUtil;
+import com.yese.mutual.MutualServiceManage;
 
 /*
  *   author:jason
@@ -20,14 +20,14 @@ public class MyApp extends Application {
     }
 
     private void initService(){
-        MutualServiceUtil.getInstance().init(this);
-        MutualServiceUtil.getInstance().setIRemoteServiceCallback(new IRemoteServiceCallback.Stub() {
+        MutualServiceManage.getInstance().init(this);
+        MutualServiceManage.getInstance().setIRemoteServiceCallback(new IRemoteServiceCallback.Stub() {
             @Override
             public void pullUpService(String content) throws RemoteException {
 
-                Log.e("jason_aidl","应用2收到pullUpService"+MyApp.this.getPackageName());
-                Intent intent = new Intent(MyApp.this, ChatSocketService.class);
-                startService(intent);
+                Log.e("jason_aidl",getPackageName()+"收到："+content);
+//                Intent intent = new Intent(MyApp.this, ChatSocketService.class);
+//                startService(intent);
             }
         });
     }

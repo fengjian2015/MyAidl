@@ -6,21 +6,26 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.Map;
+
+import static com.yese.mutual.MutualUtil.TAG;
+
+
 
 /*
- *   author:jason
- *   date:2019/5/2014:16
+ *   author:fickle
+ *   date:2020/10
  */
 public class MutualService extends Service {
-    private List<IRemoteServiceCallback> callbackList=new ArrayList<>();
+
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.e("jason_adil","服务端onCreate");
+        Log.d(TAG,"服务启动"+getClass().getCanonicalName());
     }
+
 
     @Nullable
     @Override
@@ -30,26 +35,15 @@ public class MutualService extends Service {
 
     private ServerManager.Stub serverManager=new ServerManager.Stub() {
         @Override
-        public void pullUpService(String content){
-            Log.e("jason_adil","收到启动服务"+content);
+        public void pullUpService(String content,Map activatedPackage){
             pullUpServiceCallback(content);
-        }
-
-        @Override
-        public void registerCallback(IRemoteServiceCallback cb){
-            if(cb==null||callbackList.contains(cb))return;
-            callbackList.add(cb);
-        }
-
-        @Override
-        public void unregisterCallback(IRemoteServiceCallback cb){
-            if(cb==null||!callbackList.contains(cb))return;
-            callbackList.remove(cb);
+            MutualServiceManage.getInstance().setActivatedPackage(activatedPackage);
         }
     };
 
     private void pullUpServiceCallback(String content){
-        for (IRemoteServiceCallback iRemoteServiceCallback:callbackList){
+        Log.d(TAG,"收到消息："+content +"   "+MutualServiceManage.getInstance().getCallbackLists().size());
+        for (IRemoteServiceCallback iRemoteServiceCallback:MutualServiceManage.getInstance().getCallbackLists()){
             try {
                 iRemoteServiceCallback.pullUpService(content);
             } catch (RemoteException e) {

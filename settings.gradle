@@ -1,1 +1,1 @@
-include ':app', ':webadil', ':mutual'
+include ':app', ':mutual'

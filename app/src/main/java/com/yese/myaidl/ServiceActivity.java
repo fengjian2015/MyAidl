@@ -7,8 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.yese.mutual.IRemoteServiceCallback;
-import com.yese.mutual.MutualServiceUtil;
+
 
 public class ServiceActivity extends AppCompatActivity {
     private TextView tv_content;
@@ -17,7 +16,7 @@ public class ServiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service);
         initView();
-        MutualServiceUtil.getInstance().init(ServiceActivity.this);
+//        MutualServiceUtil.getInstance().init(ServiceActivity.this);
     }
 
 
@@ -34,21 +33,21 @@ public class ServiceActivity extends AppCompatActivity {
         findViewById(R.id.bt2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MutualServiceUtil.getInstance().pullUpService("应用2拉起");
+//                MutualServiceUtil.getInstance().pullUpService("应用2拉起");
             }
         });
 
     }
 
     private void initService(){
-        MutualServiceUtil.getInstance().setIRemoteServiceCallback(new IRemoteServiceCallback.Stub() {
-            @Override
-            public void pullUpService(String content) {
-                tv_content.setText(content);
-                Log.e("jason_aidl","应用2收到pullUpService");
-                Intent intent = new Intent(ServiceActivity.this, ChatSocketService.class);
-                startService(intent);
-            }
-        });
+//        MutualServiceUtil.getInstance().setIRemoteServiceCallback(new IRemoteServiceCallback.Stub() {
+//            @Override
+//            public void pullUpService(String content) {
+//                tv_content.setText(content);
+//                Log.e("jason_aidl","应用2收到pullUpService"+content);
+////                Intent intent = new Intent(ServiceActivity.this, ChatSocketService.class);
+////                startService(intent);
+//            }
+//        });
     }
 }

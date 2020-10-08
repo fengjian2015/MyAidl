@@ -6,9 +6,5 @@ import com.yese.mutual.IRemoteServiceCallback;
 
 interface ServerManager {
 
-    void pullUpService(String content);
-
-    void registerCallback(IRemoteServiceCallback cb);
-
-    void unregisterCallback(IRemoteServiceCallback cb);
+    void pullUpService(String content,in Map activatedPackage);
 }

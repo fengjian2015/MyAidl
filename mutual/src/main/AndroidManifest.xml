@@ -4,7 +4,8 @@
     <application>
         <service
             android:name=".MutualService"
-            android:exported="true">
+            android:exported="true"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="com.yese.mutual.MutualService" />
                 <category android:name="android.intent.category.DEFAULT" />
